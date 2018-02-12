@@ -9,13 +9,6 @@ router.get("/:username", function(req, res, next) {
       authorId: 2
     }
   }).then();
-  Product.findAll({
-    include: [Review]
-  })
-    .then(result => {
-      res.status(200).send(result);
-    })
-    .catch(next);
 });
 
 router.get("/:id", function(req, res, next) {

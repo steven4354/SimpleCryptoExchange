@@ -1,7 +1,8 @@
-'use strict';
+"use strict";
 
-const Product = require('./product')
-const Review = require('./review');
+const Product = require("./product");
+const Review = require("./review");
+const User = require("./user");
 
 Product.hasMany(Review);
 Review.belongsTo(Product);

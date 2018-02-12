@@ -1,28 +1,28 @@
-'use strict'
+"use strict";
 
-const Sequelize = require('sequelize');
-const db = require('../index.js');
+const Sequelize = require("sequelize");
+const db = require("../index.js");
 
-const User = db.define('users', {
+const User = db.define("users", {
   username: {
-  	type: Sequelize.STRING,
-  	allowNull: false
+    type: Sequelize.STRING,
+    allowNull: false
   },
   usd: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.INTEGER
   },
   bitcoinNum: {
-  	type: Sequelize.INTEGER,
+    type: Sequelize.INTEGER
   },
-  LitecoinNum: {
-  	type: Sequelize.INTEGER,
+  litecoinNum: {
+    type: Sequelize.INTEGER
   },
-  DogecoinNum: {
-    type: Sequelize.INTEGER,
+  dogecoinNum: {
+    type: Sequelize.INTEGER
   },
-  MoneroNum: {
-    type: Sequelize.INTEGER,
-  },
+  moneroNum: {
+    type: Sequelize.INTEGER
+  }
 });
 
 module.exports = User;
