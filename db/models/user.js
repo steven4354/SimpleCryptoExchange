@@ -8,6 +8,21 @@ const User = db.define('users', {
   	type: Sequelize.STRING,
   	allowNull: false
   },
+  usd: {
+    type: Sequelize.INTEGER,
+  },
+  bitcoinNum: {
+  	type: Sequelize.INTEGER,
+  },
+  LitecoinNum: {
+  	type: Sequelize.INTEGER,
+  },
+  DogecoinNum: {
+    type: Sequelize.INTEGER,
+  },
+  MoneroNum: {
+    type: Sequelize.INTEGER,
+  },
 });
 
 module.exports = User;
