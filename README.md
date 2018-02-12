@@ -8,3 +8,6 @@
 
 - boilerplate for full stack react + node:
   https://www.npmjs.com/package/create-react-app-fullstack
+
+- additional database references:
+  https://stackoverflow.com/questions/9463318/how-to-exit-from-postgresql-command-line-utility-psql

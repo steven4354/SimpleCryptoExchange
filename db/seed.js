@@ -216,7 +216,7 @@ const seedUsers = () =>
         moneroNum: 0
       }
     ],
-    review => db.model("users").create(user)
+    user => db.model("users").create(user)
   );
 
 db.didSync
