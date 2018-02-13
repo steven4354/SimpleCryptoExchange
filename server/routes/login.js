@@ -14,11 +14,7 @@ router.get("/:username", function(req, res, next) {
       moneroNum: 0
     }
   }).spread((user, created) => {
-    if (created) {
-      res.send(user);
-    } else {
-      res.send("username already in use");
-    }
+    res.send(user);
 
     /*
      findOrCreate returns an array containing the object that was found or created and a boolean that will be true if a new object was created and false if not, like so:

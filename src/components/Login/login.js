@@ -32,6 +32,7 @@ class Login extends Component {
       })
       .then(readable => {
         console.log("readable response =>", readable);
+        this.props.history.push(`/ticker/${readable.username}`);
       });
   }
 
