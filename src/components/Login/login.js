@@ -24,9 +24,15 @@ class Login extends Component {
     e.preventDefault();
 
     var form = document.querySelector("#login");
-    var str = serialize(form);
+    var obj = serialize(form, {hash: true});
 
-    console.log("form => ", str);
+    fetch(`http://localhost:3000/api/login/${obj.username}`)
+      .then(response => {
+        return response.json();
+      })
+      .then(readable => {
+        console.log("readable response =>", readable);
+      });
   }
 
   render() {

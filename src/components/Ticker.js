@@ -16,7 +16,7 @@ import {Link} from "react-router-dom";
 import serialize from "form-serialize";
 import Loader from "react-loader";
 
-class Login extends Component {
+class Ticker extends Component {
   constructor() {
     super();
     this.state = {
@@ -77,7 +77,18 @@ class Login extends Component {
                             <td>{obj.price_usd}</td>
                             <td>{obj.price_btc}</td>
                             <td>
-                              <Link to="/trade">Trade</Link>
+                              <Link
+                                to={{
+                                  pathname: "/trade",
+                                  state: {
+                                    coin: obj.id,
+                                    usd_price: obj.price_usd,
+                                    btc_price: obj.price_btc
+                                  }
+                                }}
+                              >
+                                Trade
+                              </Link>
                             </td>
                           </tr>
                         );
@@ -97,4 +108,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Ticker;
