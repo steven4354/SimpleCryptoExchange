@@ -3,6 +3,7 @@ import App from "./containers/AppContainer";
 import About from "./components/About/About";
 import Login from "./components/Login/login";
 import Registration from "./components/Registration/registration";
+import Ticker from "./components/Ticker";
 
 import {BrowserRouter as Router, Route} from "react-router-dom";
 
@@ -13,6 +14,7 @@ const Routes = () => {
         <Route exact path="/" component={Login} />
         <Route exact path="/register" component={Registration} />
         <Route exact path="/about" component={About} />
+        <Route exact path="/ticker" component={Ticker} />
       </div>
     </Router>
   );
