@@ -9,6 +9,7 @@ import {
   Label,
   Input,
   FormText,
+  Table,
   Card
 } from "reactstrap";
 import {Link} from "react-router-dom";
@@ -24,6 +25,7 @@ class Login extends Component {
     };
   }
 
+  //grabbing coins prices data
   componentDidMount() {
     fetch("https://api.coinmarketcap.com/v1/ticker/")
       .then(function(res) {
@@ -57,7 +59,34 @@ class Login extends Component {
           <Col>
             <Card body style={{marginTop: "100px", padding: "40px"}}>
               <Loader loaded={this.state.fetched}>
-                <div> data </div>
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>Coin</th>
+                      <th>Price in USD</th>
+                      <th>Price in BTC</th>
+                      <th>Trade</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.fetched ? (
+                      this.state.data.map(obj => {
+                        return (
+                          <tr key={obj.id}>
+                            <th scope="row">{obj.id}</th>
+                            <td>{obj.price_usd}</td>
+                            <td>{obj.price_btc}</td>
+                            <td>
+                              <Link to="/trade">Trade</Link>
+                            </td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <div> Loading </div>
+                    )}
+                  </tbody>
+                </Table>
               </Loader>
             </Card>
           </Col>
