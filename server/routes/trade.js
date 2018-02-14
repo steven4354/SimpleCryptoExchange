@@ -31,15 +31,15 @@ router.post("/", async (req, res, next) => {
     //checking to make sure the transaction is valid
     //before initiating it
     if (
-      user[req.body.convertFrom] - parseInt(req.body.amountToConvertFrom) < 0 &&
+      user[req.body.convertFrom] - parseFloat(req.body.amountToConvertFrom) < 0 &&
       req.body.convertFrom == "usd"
     ) {
       res.send({
         message: "transaction not valid, would result in negative balance"
       });
     } else if (
-      user[req.body.convertFrom + "Num"] -
-        parseInt(req.body.amountToConvertFrom) <
+      parseFloat(user[req.body.convertFrom + "Num"]) -
+        parseFloat(req.body.amountToConvertFrom) <
         0 &&
       req.body.convertFrom == "bitcoin"
     ) {
@@ -47,9 +47,10 @@ router.post("/", async (req, res, next) => {
         message: "transaction not valid, would result in negative balance"
       });
 
-      //transaction check is complete,
-      //starting on conversion
+    //transaction check is complete,
+    //starting on conversion
     } else if (req.body.convertFrom == "usd") {
+
       //debiting your balance for trade
       user[req.body.convertFrom] =
         user[req.body.convertFrom] - parseInt(req.body.amountToConvertFrom);
@@ -62,7 +63,9 @@ router.post("/", async (req, res, next) => {
         parseFloat(req.body.amountToConvertFrom) /
           parseFloat(coinPrice.price_usd);
       await user.save();
+
     } else if (req.body.convertFrom == "bitcoin") {
+
       //debiting your balance for trade
       let coinNum = req.body.convertFrom + "Num";
       user[coinNum] =
@@ -76,6 +79,7 @@ router.post("/", async (req, res, next) => {
         parseFloat(req.body.amountToConvertFrom) /
           parseFloat(coinPrice.price_btc);
       await user.save();
+
     }
 
     res.send(user);

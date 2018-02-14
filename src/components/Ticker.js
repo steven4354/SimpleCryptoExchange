@@ -45,7 +45,6 @@ class Ticker extends Component {
         });
       })
       .then(filtered => {
-        console.log("coins data => ", filtered);
         this.setState({
           data: filtered
         });
@@ -66,8 +65,6 @@ class Ticker extends Component {
   }
 
   render() {
-    console.log("the props =>", this.props);
-
     return (
       <Container>
         <Row>

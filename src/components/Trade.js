@@ -34,12 +34,10 @@ class Trade extends Component {
         return response.json();
       })
       .then(readable => {
-        console.log("readable from trade fetch =>", readable);
         this.setState({
           fetched: true,
           userinfo: readable
         });
-        console.log("trade state =>", this.state);
       });
   }
 
@@ -55,7 +53,6 @@ class Trade extends Component {
       username: this.state.userinfo.username
     };
 
-    console.log("request body to be sent => ", body);
     fetch(`http://localhost:3000/api/trade`, {
       method: "post",
       body: JSON.stringify(body),
@@ -67,26 +64,24 @@ class Trade extends Component {
         return response.json();
       })
       .then(readable => {
-        console.log("readable response =>", readable);
         let username = readable.username || body.username;
         this.props.history.push(`/ticker/${username}`);
       });
   }
 
   render() {
-    console.log("trade props =>", this.props);
-    console.log("previous link state =>", this.props.location.state);
+    //information passed on from Link component in Ticker
     let tradeCoin = this.props.location.state.coin;
     let username = this.props.location.state.username;
 
     return (
       <Container>
         <Row>
+          {/*displays current balance*/}
+
           <Col>
             <Card body style={{marginTop: "100px", padding: "40px"}}>
               <Loader loaded={this.state.fetched}>
-                {/*displays current balance*/}
-
                 {this.state.fetched ? (
                   <div>
                     <CardTitle>
@@ -114,6 +109,9 @@ class Trade extends Component {
               </Loader>
             </Card>
           </Col>
+
+          {/*allows for trading*/}
+
           <Col>
             <Card body style={{marginTop: "100px", padding: "40px"}}>
               <Loader loaded={this.state.fetched}>
@@ -148,6 +146,8 @@ class Trade extends Component {
                     </Form>
                   </div>
                 ) : null}
+
+                {/*component displayed when bitcoin is selected*/}
                 {this.state.fetched && tradeCoin == "bitcoin" ? (
                   <div>
                     <CardTitle>
@@ -174,6 +174,8 @@ class Trade extends Component {
                     </Form>
                   </div>
                 ) : null}
+
+                {/*component displayed when trading coins with bitcoin*/}
                 {this.state.fetched &&
                 this.state.userinfo.bitcoinNum > 0 &&
                 tradeCoin !== "bitcoin" ? (
