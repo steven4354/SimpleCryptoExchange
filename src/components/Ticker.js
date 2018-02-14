@@ -10,7 +10,8 @@ import {
   Input,
   FormText,
   Table,
-  Card
+  Card,
+  CardTitle
 } from "reactstrap";
 import {Link} from "react-router-dom";
 import serialize from "form-serialize";
@@ -21,7 +22,8 @@ class Ticker extends Component {
     super();
     this.state = {
       fetched: false,
-      data: null
+      data: null,
+      userinfo: null
     };
   }
 
@@ -45,9 +47,21 @@ class Ticker extends Component {
       .then(filtered => {
         console.log("coins data => ", filtered);
         this.setState({
-          fetched: true,
           data: filtered
         });
+
+        //second fetch to grab userinfo
+        let username = this.props.match.params.username;
+        fetch(`http://localhost:3000/api/userinfo/${username}`)
+          .then(response => {
+            return response.json();
+          })
+          .then(readable => {
+            this.setState({
+              fetched: true,
+              userinfo: readable
+            });
+          });
       });
   }
 
@@ -57,7 +71,6 @@ class Ticker extends Component {
     return (
       <Container>
         <Row>
-          <Col xs="3" />
           <Col>
             <Card body style={{marginTop: "100px", padding: "40px"}}>
               <Loader loaded={this.state.fetched}>
@@ -104,7 +117,38 @@ class Ticker extends Component {
               </Loader>
             </Card>
           </Col>
-          <Col xs="3" />
+          <Col>
+            <Card body style={{marginTop: "100px", padding: "40px"}}>
+              <Loader loaded={this.state.fetched}>
+                {/*displays current balance*/}
+
+                {this.state.fetched ? (
+                  <div>
+                    <CardTitle>
+                      {this.state.userinfo.username}'s current balance
+                    </CardTitle>
+                    <div>
+                      <strong>USD</strong>: {this.state.userinfo.usd}
+                    </div>
+                    <div>
+                      <strong>Bitcoin</strong>: {this.state.userinfo.bitcoinNum}
+                    </div>
+                    <div>
+                      <strong>Dogecoin</strong>:{" "}
+                      {this.state.userinfo.dogecoinNum}
+                    </div>
+                    <div>
+                      <strong>Monero</strong>: {this.state.userinfo.moneroNum}
+                    </div>
+                    <div>
+                      <strong>Litecoin</strong>:{" "}
+                      {this.state.userinfo.litecoinNum}
+                    </div>
+                  </div>
+                ) : null}
+              </Loader>
+            </Card>
+          </Col>
         </Row>
       </Container>
     );

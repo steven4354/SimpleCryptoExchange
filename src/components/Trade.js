@@ -49,10 +49,6 @@ class Trade extends Component {
     var form = document.querySelector("#trade");
     var obj = serialize(form, {hash: true});
     console.log("form obj => ", obj);
-    // obj contains
-    // convertFrom: "",
-    // convertTo: "",
-    // amountToConvertFrom: ""
 
     var body = {
       ...obj,
@@ -72,7 +68,8 @@ class Trade extends Component {
       })
       .then(readable => {
         console.log("readable response =>", readable);
-        this.props.history.push(`/ticker/${readable.username}`);
+        let username = readable.username || body.username;
+        this.props.history.push(`/ticker/${username}`);
       });
   }
 
@@ -156,9 +153,7 @@ class Trade extends Component {
                     </Form>
                   </div>
                 ) : null}
-                {this.state.fetched &&
-                tradeCoin == "bitcoin" &&
-                this.state.userinfo.bitcoinNum == 0 ? (
+                {this.state.fetched && tradeCoin == "bitcoin" ? (
                   <div>
                     <CardTitle>
                       Trade for{" "}
@@ -184,7 +179,9 @@ class Trade extends Component {
                     </Form>
                   </div>
                 ) : null}
-                {this.state.fetched && this.state.userinfo.bitcoinNum > 0 ? (
+                {this.state.fetched &&
+                this.state.userinfo.bitcoinNum > 0 &&
+                tradeCoin !== "bitcoin" ? (
                   <div>
                     <CardTitle>
                       Trade for{" "}
@@ -197,7 +194,8 @@ class Trade extends Component {
                           for={tradeCoin[0].toUpperCase() + tradeCoin.slice(1)}
                         >
                           Amount of Bitcoins to trade for{" "}
-                          {tradeCoin[0].toUpperCase() + tradeCoin.slice(1)}
+                          {tradeCoin[0].toUpperCase() + tradeCoin.slice(1)}{" "}
+                          (Decimal Values Accepted)
                         </Label>
                         <Input
                           type="text"
