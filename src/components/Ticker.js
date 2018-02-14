@@ -52,6 +52,8 @@ class Ticker extends Component {
   }
 
   render() {
+    console.log("the props =>", this.props);
+
     return (
       <Container>
         <Row>
@@ -83,7 +85,8 @@ class Ticker extends Component {
                                   state: {
                                     coin: obj.id,
                                     usd_price: obj.price_usd,
-                                    btc_price: obj.price_btc
+                                    btc_price: obj.price_btc,
+                                    username: this.props.match.params.username
                                   }
                                 }}
                               >

@@ -10,7 +10,7 @@ router.get("/:username", function(req, res, next) {
       usd: 10000,
       bitcoinNum: 0,
       litecoinNum: 0,
-      dogecoin: 0,
+      dogecoinNum: 0,
       moneroNum: 0
     }
   }).spread((user, created) => {

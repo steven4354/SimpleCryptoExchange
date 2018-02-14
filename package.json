@@ -12,6 +12,7 @@
     "express": "^4.16.2",
     "form-serialize": "^0.7.2",
     "morgan": "^1.9.0",
+    "node-fetch": "^2.0.0",
     "nodemon": "^1.14.12",
     "pg": "^7.4.1",
     "react": "^16.2.0",

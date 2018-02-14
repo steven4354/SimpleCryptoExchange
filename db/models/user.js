@@ -9,19 +9,19 @@ const User = db.define("users", {
     allowNull: false
   },
   usd: {
-    type: Sequelize.INTEGER
+    type: Sequelize.DECIMAL
   },
   bitcoinNum: {
-    type: Sequelize.INTEGER
+    type: Sequelize.DECIMAL
   },
   litecoinNum: {
-    type: Sequelize.INTEGER
+    type: Sequelize.DECIMAL
   },
   dogecoinNum: {
-    type: Sequelize.INTEGER
+    type: Sequelize.DECIMAL
   },
   moneroNum: {
-    type: Sequelize.INTEGER
+    type: Sequelize.DECIMAL
   }
 });
 
