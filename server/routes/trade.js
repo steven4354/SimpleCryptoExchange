@@ -8,7 +8,6 @@ const router = require("express").Router();
 
 router.post("/", async (req, res, next) => {
   try {
-    console.log("body from the request object =>", req.body);
     let user = await User.findOne({
       where: {username: req.body.username}
     });
@@ -29,10 +28,8 @@ router.post("/", async (req, res, next) => {
         coinPrice = filtered[0];
       });
 
-    console.log("coin price => ", coinPrice);
-
     //checking to make sure the transaction is valid
-    //then initiating it
+    //before initiating it
     if (
       user[req.body.convertFrom] - parseInt(req.body.amountToConvertFrom) < 0 &&
       req.body.convertFrom == "usd"
@@ -49,6 +46,9 @@ router.post("/", async (req, res, next) => {
       res.send({
         message: "transaction not valid, would result in negative balance"
       });
+
+      //transaction check is complete,
+      //starting on conversion
     } else if (req.body.convertFrom == "usd") {
       //debiting your balance for trade
       user[req.body.convertFrom] =
@@ -65,7 +65,8 @@ router.post("/", async (req, res, next) => {
     } else if (req.body.convertFrom == "bitcoin") {
       //debiting your balance for trade
       let coinNum = req.body.convertFrom + "Num";
-      user[coinNum] = user[coinNum] - parseInt(req.body.amountToConvertFrom);
+      user[coinNum] =
+        parseFloat(user[coinNum]) - parseFloat(req.body.amountToConvertFrom);
       await user.save();
 
       //crediting your balance from trade

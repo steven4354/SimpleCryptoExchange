@@ -1,13 +1,21 @@
-* Development Notes
+* Prerequisites
+  Before running application, make sure these are installed:
 
-- dropping a database:
-  https://www.postgresql.org/docs/8.2/static/sql-dropdatabase.html
+  * node ecosystem: https://nodejs.org/en/
+  * postgres: https://www.postgresql.org/
 
-- listing all the databases:
-  https://dba.stackexchange.com/questions/1285/how-do-i-list-all-databases-and-tables-using-psql
-
-- boilerplate for full stack react + node:
-  https://www.npmjs.com/package/create-react-app-fullstack
-
-- additional database references:
-  https://stackoverflow.com/questions/9463318/how-to-exit-from-postgresql-command-line-utility-psql
+* Running Application on Local Machine
+  To run this on your machine:
+  * open terminal or bash, and run:
+    ```
+    git clone <this-github-link>
+    cd <path-to-this-project>
+    ```
+  * create a database for this project:
+    ```
+    createdb crypto-exchange-w
+    ```
+  * run the project
+    ```
+    npm start
+    ```

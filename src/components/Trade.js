@@ -82,7 +82,6 @@ class Trade extends Component {
     return (
       <Container>
         <Row>
-          <Col xs="3" />
           <Col>
             <Card body style={{marginTop: "100px", padding: "40px"}}>
               <Loader loaded={this.state.fetched}>
@@ -115,10 +114,6 @@ class Trade extends Component {
               </Loader>
             </Card>
           </Col>
-          <Col xs="3" />
-        </Row>
-        <Row>
-          <Col xs="3" />
           <Col>
             <Card body style={{marginTop: "100px", padding: "40px"}}>
               <Loader loaded={this.state.fetched}>
@@ -222,7 +217,6 @@ class Trade extends Component {
               </Loader>
             </Card>
           </Col>
-          <Col xs="3" />
         </Row>
       </Container>
     );
